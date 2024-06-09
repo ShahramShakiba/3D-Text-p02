@@ -7,13 +7,12 @@
  
 > 👤 Instructed by a _proficient_ and _expert educator_, ` "Bruno Simon" ` .
 
- <br/><br/>
+ <br/>
+
+#### _🫧 I'm so hyped for this awesome project I'm about to dive into❕ <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Picture this: 👀 <br/> I'm gonna make a huge `  3D Text  ` pop right in the center of the scene, with a bunch of rad "floating objects" all around it. ☄️ <br/> 🌊 It's gonna be absolutely mind-blowing! Let's do this!_
 
 
 
-<br/>
-
-For this project, ...
 <br/> <br/> 
 
 
@@ -27,7 +26,7 @@ For this project, ...
 
 > _Which Concepts Have I Covered_: <br/>
 
-_<h4>01. </h4>_
+_<h4>01. I am going to use the TextBufferGeometry class.</h4>_
 _<h4>02. </h4>_
 _<h4>03. </h4>_
 _<h4>04. </h4>_
