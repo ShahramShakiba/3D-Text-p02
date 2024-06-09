@@ -9,7 +9,7 @@
 
  <br/>
 
-#### _🫧 I'm so hyped for this awesome project I'm about to dive into❕ <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Picture this: 👀 <br/> I'm gonna make a huge `  3D Text  ` pop right in the center of the scene, with a bunch of rad "floating objects" all around it. ☄️ <br/> 🌊 It's gonna be absolutely mind-blowing! Let's do this!_
+#### _🫧 I'm so hyped for this awesome project I'm about to dive into❕ <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Picture this: 👀 <br/> I'm gonna make a huge `  3D Text  ` pop right in the center of the scene, with a bunch of donut-shaped "floating objects" all around it. ☄️ <br/> 🌊 It's gonna be absolutely mind-blowing! Let's do this!_
 
 
 
