@@ -40,20 +40,32 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
   ); */
   textGeometry.center();
 
-  const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
-  // textMaterial.wireframe = true;
-
-  const text = new THREE.Mesh(textGeometry, textMaterial);
+  const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
+  const text = new THREE.Mesh(textGeometry, material);
   scene.add(text);
 
-  for (let i = 0; i < 100; i++) {
-    const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45);
-    const donutMaterial = new THREE.MeshMatcapMaterial({
-      matcap: matcapTexture,
-    });
-    const donut = new THREE.Mesh(donutGeometry, donutMaterial);
+  console.time('donuts');
+
+  const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45);
+
+  for (let i = 0; i < 1000; i++) {
+    const donut = new THREE.Mesh(donutGeometry, material);
+
+    // position from both side - left & right 
+    donut.position.x = (Math.random() - 0.5) * 10;
+    donut.position.y = (Math.random() - 0.5) * 10;
+    donut.position.z = (Math.random() - 0.5) * 10;
+
+    donut.rotation.x = Math.random() * Math.PI;
+    donut.rotation.y = Math.random() * Math.PI;
+
+    const scale = Math.random();
+    donut.scale.set(scale, scale, scale);
+
     scene.add(donut);
   }
+
+  console.timeEnd('donuts');
 });
 
 //====================== Camera ==========================
