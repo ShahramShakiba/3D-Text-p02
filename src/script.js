@@ -13,16 +13,20 @@ const axesHelper = new THREE.AxesHelper(); // Axes Helper
 
 //======================= Textures ========================
 const textureLoader = new THREE.TextureLoader();
-const matcapTexture = textureLoader.load('/textures/matcaps/1.png');
-// matcapTexture.colorSpace = THREE.SRGBColorSpace;
+const matcapTextTexture = textureLoader.load('/textures/matcaps/1.png');
+const matcapDonutTexture = textureLoader.load('/textures/matcaps/4.png');
+
+// Arrays to hold the donuts and their rotation speeds
+const donuts = [];
+const rotationSpeeds = [];
 
 //======================= Fonts ========================
 const fontLoader = new FontLoader();
 fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
-  const textGeometry = new TextGeometry('Creative Developer & Curious Mind', {
+  const textGeometry = new TextGeometry('Creative Developer \n& Curious Mind', {
     font,
-    size: 0.5,
-    height: 0.2,
+    size: 0.4,
+    height: 0.1,
     curveSegments: 5,
     bevelEnabled: true,
     bevelThickness: 0.03,
@@ -40,21 +44,26 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
   ); */
   textGeometry.center();
 
-  const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
-  const text = new THREE.Mesh(textGeometry, material);
+  const textMaterial = new THREE.MeshMatcapMaterial({
+    matcap: matcapTextTexture,
+  });
+  const text = new THREE.Mesh(textGeometry, textMaterial);
   scene.add(text);
 
   console.time('donuts');
 
+  const donutMaterial = new THREE.MeshMatcapMaterial({
+    matcap: matcapDonutTexture,
+  });
   const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45);
 
   for (let i = 0; i < 1000; i++) {
-    const donut = new THREE.Mesh(donutGeometry, material);
+    const donut = new THREE.Mesh(donutGeometry, donutMaterial);
 
-    // position from both side - left & right 
-    donut.position.x = (Math.random() - 0.5) * 10;
-    donut.position.y = (Math.random() - 0.5) * 10;
-    donut.position.z = (Math.random() - 0.5) * 10;
+    // position from both side - left & right
+    donut.position.x = (Math.random() - 0.5) * 25;
+    donut.position.y = (Math.random() - 0.5) * 25;
+    donut.position.z = (Math.random() - 0.5) * 25;
 
     donut.rotation.x = Math.random() * Math.PI;
     donut.rotation.y = Math.random() * Math.PI;
@@ -63,6 +72,14 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
     donut.scale.set(scale, scale, scale);
 
     scene.add(donut);
+    donuts.push(donut);
+
+    const rotationSpeed = {
+      x: (Math.random() - 0.5) * 0.02,
+      y: (Math.random() - 0.5) * 0.02,
+      z: (Math.random() - 0.5) * 0.01,
+    };
+    rotationSpeeds.push(rotationSpeed);
   }
 
   console.timeEnd('donuts');
@@ -85,6 +102,7 @@ controls.enableDamping = true;
 //===================== Renderer =========================
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  antialias: true,
 });
 
 renderer.setSize(width, height);
@@ -109,6 +127,14 @@ window.addEventListener('resize', () => {
 const clock = new THREE.Clock();
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  donuts.forEach((donut, index) => {
+    const speed = rotationSpeeds[index];
+
+    donut.rotation.x += speed.x;
+    donut.rotation.y += speed.y;
+    donut.rotation.z += speed.z;
+  });
 
   // Update controls
   controls.update();
