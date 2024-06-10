@@ -9,10 +9,12 @@ const scene = new THREE.Scene(); // Scene
 const gui = new GUI(); // Debug
 
 const axesHelper = new THREE.AxesHelper(); // Axes Helper
-scene.add(axesHelper);
+// scene.add(axesHelper);
 
 //======================= Textures ========================
 const textureLoader = new THREE.TextureLoader();
+const matcapTexture = textureLoader.load('/textures/matcaps/1.png');
+// matcapTexture.colorSpace = THREE.SRGBColorSpace;
 
 //======================= Fonts ========================
 const fontLoader = new FontLoader();
@@ -38,11 +40,20 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
   ); */
   textGeometry.center();
 
-  const textMaterial = new THREE.MeshBasicMaterial();
-  textMaterial.wireframe = true;
+  const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
+  // textMaterial.wireframe = true;
 
   const text = new THREE.Mesh(textGeometry, textMaterial);
   scene.add(text);
+
+  for (let i = 0; i < 100; i++) {
+    const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45);
+    const donutMaterial = new THREE.MeshMatcapMaterial({
+      matcap: matcapTexture,
+    });
+    const donut = new THREE.Mesh(donutGeometry, donutMaterial);
+    scene.add(donut);
+  }
 });
 
 //====================== Camera ==========================
