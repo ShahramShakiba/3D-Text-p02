@@ -13,7 +13,9 @@ const axesHelper = new THREE.AxesHelper(); // Axes Helper
 //======================= Textures ========================
 const textureLoader = new THREE.TextureLoader();
 const textTexture = textureLoader.load('/textures/matcaps/4.png');
+textTexture.colorSpace = THREE.SRGBColorSpace;
 const donutTexture = textureLoader.load('/textures/matcaps/8.png');
+// donutTexture.colorSpace = THREE.SRGBColorSpace;
 
 // Arrays to hold the donuts and their rotation speeds
 const donuts = [];
@@ -125,10 +127,10 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
 let width = window.innerWidth;
 let height = window.innerHeight;
 
-const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(85, width / height, 0.1, 100);
 camera.position.x = 1;
 camera.position.y = 1;
-camera.position.z = 3.5; // This will be the final position after the animation
+camera.position.z = 4.5; // This will be the final position after the animation
 scene.add(camera);
 
 //=================== Orbit Controls =====================
