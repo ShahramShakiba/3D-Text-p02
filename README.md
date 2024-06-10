@@ -19,18 +19,20 @@
 <br/>
 
 > [!IMPORTANT]
->> - It is crucial to grasp that the project incorporates _"Three.js"_, and _"Vanilla JavaScript"_ to build a visually impressive 3D portfolio.
+>> - It is crucial to grasp that the project incorporates _"Three.js"_, _"Vanilla JavaScript"_, and _"GSAP"_ to build a visually impressive 3D Text.
 
 
 <br/><br/>
 
 > _Which Concepts Have I Covered_: <br/>
 
-_<h4>01. I am going to use the TextBufferGeometry class.</h4>_
-_<h4>02. </h4>_
-_<h4>03. </h4>_
-_<h4>04. </h4>_
-_<h4>05. </h4>_
+01. _<h4>Three.js supports 3D text geometries using the TextGeometry class, but I need a font in a specific json format known as `  typeface  `.</h4>_
+02. _<h4>Add Helvetiker_regular.typeface Font & Attach the Text to the Scene.</h4>_
+03. _<h4>Utilizing the "Center Method" to centralize the text.</h4>_
+04. _<h4>Include 2500 Donuts in the Scene.</h4>_
+05. _<h4>Randomize the placement of the Donuts to cover the entire screen evenly.</h4>_
+06. _<h4>"Rotate" the donuts randomly in all directions.</h4>_
+07. _<h4>Include "GSAP" Animation in both the Camera View and the Text.</h4>_
 
  
 <br/><br/>
@@ -40,7 +42,18 @@ _<h4>05. </h4>_
 
 <br/>
 
-<!--------- Video --------->
+<!--------- Video 
+Creative Developer & Avid Learner
+Innovative Developer & Knowledge Seeker
+Dynamic Developer & Challenge Enthusiast
+Creative Coder & Lifelong Learner
+Forward-Thinking Developer & Continuous Learner
+Inventive Developer & Intellectual Explorer
+Versatile Developer & Curious Mind
+Creative Technologist & Passionate Learner
+Imaginative Developer & Challenge Conqueror
+Adaptive Developer & Knowledge Addict
+--------->
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Clapper%20Board.webp" alt="Clapper Board" width="35" />
 
 
