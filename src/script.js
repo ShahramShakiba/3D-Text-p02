@@ -1,16 +1,37 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import GUI from 'lil-gui';
-
+import { FontLoader } from 'three/examples/jsm/Addons.js';
+import { TextGeometry } from 'three/examples/jsm/Addons.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const canvas = document.querySelector('canvas.webgl'); // Canvas
 const scene = new THREE.Scene(); // Scene
 const gui = new GUI(); // Debug
 
-//==================== Textures =======================
+//======================= Textures ========================
 const textureLoader = new THREE.TextureLoader();
 
-//==================== Objects ========================
+//======================= Fonts ========================
+const fontLoader = new FontLoader();
+fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
+  const textGeometry = new TextGeometry('Creative Developer & Curious Mind', {
+    font,
+    size: 0.5,
+    height: 0.5,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 0.03,
+    bevelSize: 0.02,
+    bevelOffset: 0,
+    bevelSegments: 5,
+  });
+
+  const textMaterial = new THREE.MeshBasicMaterial();
+  const text = new THREE.Mesh(textGeometry, textMaterial);
+  scene.add(text);
+});
+
+//====================== Objects ==========================
 const cube = new THREE.Mesh(
   new THREE.BoxGeometry(1, 1, 1),
   new THREE.MeshBasicMaterial()
@@ -18,25 +39,10 @@ const cube = new THREE.Mesh(
 
 scene.add(cube);
 
-//==================== Resize Listener ===================
+//====================== Camera ==========================
 let width = window.innerWidth;
 let height = window.innerHeight;
 
-window.addEventListener('resize', () => {
-  // Update sizes
-  width = window.innerWidth;
-  height = window.innerHeight;
-
-  // Update camera
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-
-  // Update renderer
-  renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-});
-
-//====================== Camera ==========================
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
 camera.position.x = 1;
 camera.position.y = 1;
@@ -55,7 +61,22 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(width, height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-//==================== Animate ===========================
+//==================== Resize Listener ===================
+window.addEventListener('resize', () => {
+  // Update sizes
+  width = window.innerWidth;
+  height = window.innerHeight;
+
+  // Update camera
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  // Update renderer
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+
+//==================== Animate ==========================
 const clock = new THREE.Clock();
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
