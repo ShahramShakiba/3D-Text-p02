@@ -28,7 +28,7 @@ const texts = [];
 
 //======================= Fonts ========================
 const fontLoader = new FontLoader();
-fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
+fontLoader.load('/fonts/optimer_bold.typeface.json', (font) => {
   const textMaterial = new THREE.MeshMatcapMaterial({
     matcap: textTexture,
   });
@@ -36,7 +36,7 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
     matcap: nameTexture,
   });
 
-  // Add your name at the top
+  //============ My Name
   const nameGeometry = new TextGeometry('Shahram Shakiba', {
     font,
     size: 0.4,
@@ -49,13 +49,15 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
     bevelSegments: 4,
   });
   nameGeometry.center();
+
   const nameMesh = new THREE.Mesh(nameGeometry, nameMaterial);
-  nameMesh.position.y = 1.0; // Position it above the other lines
+  nameMesh.position.y = 1;
   scene.add(nameMesh);
   texts.push(nameMesh);
 
+  //============ Description
   const lines = ['Creative Developer', '&', 'Curious Mind'];
-  const lineHeight = 0.6; // Adjust the line height as needed
+  const lineHeight = -0.6;
 
   lines.forEach((line, index) => {
     const textGeometry = new TextGeometry(line, {
@@ -71,15 +73,39 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
     });
     textGeometry.center();
 
-    const text = new THREE.Mesh(textGeometry, textMaterial);
-    text.position.y = index * -lineHeight;
-    scene.add(text);
+    const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+    textMesh.position.y = index * lineHeight;
+    texts.push(textMesh); // Add text mesh to the array
+    scene.add(textMesh);
+  });
 
-    texts.push(text); // Add text mesh to the array
+  // Add GSAP animation for the texts
+  texts.forEach((text, index) => {
+    gsap.from(text.position, {
+      z: 20, // Start from 
+      duration: 8,
+      delay: index * 0.5, // Delay each line's animation
+      ease: 'elastic.out', 
+    });
+    gsap.from(text.rotation, {
+      y: Math.PI * 2, // Rotate 360 degrees
+      duration: 4,
+      delay: index * 0.5, 
+      ease: 'power2.out', 
+    });
+    gsap.from(text.scale, {
+      x: 0,
+      y: 0,
+      z: 0,
+      duration: 12,
+      delay: index * 0.3, 
+      ease: 'elastic.out(5, 1.5)', 
+    });
   });
 
   console.time('donuts');
 
+  //============ Donuts
   const donutMaterial = new THREE.MeshMatcapMaterial({
     matcap: donutTexture,
   });
@@ -93,57 +119,27 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
     donut.position.y = (Math.random() - 0.5) * 33;
     donut.position.z = (Math.random() - 0.5) * 33;
 
+    // rotate the view of donuts in different direction
     donut.rotation.x = Math.random() * Math.PI;
     donut.rotation.y = Math.random() * Math.PI;
 
+    // donuts with different scale
     const scale = Math.random();
     donut.scale.set(scale, scale, scale);
 
-    scene.add(donut);
-    donuts.push(donut);
-
+    // add rotation
     const rotationSpeed = {
       x: (Math.random() - 0.5) * 0.02,
       y: (Math.random() - 0.5) * 0.02,
       z: (Math.random() - 0.5) * 0.01,
     };
+
     rotationSpeeds.push(rotationSpeed);
+    donuts.push(donut);
+    scene.add(donut);
   }
 
   console.timeEnd('donuts');
-
-  // Add GSAP animation for the camera
-  gsap.from(camera.position, {
-    z: 40, // Start from a distant position on the z-axis
-    y: -1,
-    x: -55,
-    duration: 7,
-    ease: 'back.out', // Smooth bounce effect
-  });
-
-  // Add GSAP animation for the texts
-  texts.forEach((text, index) => {
-    gsap.from(text.position, {
-      z: 20, // Start from a distant position on the z-axis
-      duration: 9,
-      delay: index * 0.5, // Delay each line's animation
-      ease: 'elastic.out', // Smooth bounce effect
-    });
-    gsap.from(text.rotation, {
-      y: Math.PI * 2, // Rotate 360 degrees
-      duration: 4,
-      delay: index * 0.5, // Delay each line's animation
-      ease: 'power2.out', // Smooth ease effect
-    });
-    gsap.from(text.scale, {
-      x: 0,
-      y: 0,
-      z: 0,
-      duration: 4,
-      delay: index * 0.5, // Delay each line's animation
-      ease: 'elastic.out(2, 0.3)', // Elastic ease effect
-    });
-  });
 });
 
 //====================== Camera ==========================
@@ -153,8 +149,16 @@ let height = window.innerHeight;
 const camera = new THREE.PerspectiveCamera(85, width / height, 0.1, 100);
 camera.position.x = -1.7;
 camera.position.y = 1.5;
-camera.position.z = 5.2; // This will be the final position after the animation
+camera.position.z = 5; // This will be the final position after the animation
 scene.add(camera);
+
+gsap.from(camera.position, {
+  z: 32, // Start from a distant position on the z-axis
+  y: -1,
+  x: -52,
+  duration: 7,
+  ease: 'back.out', // Smooth bounce effect
+});
 
 //=================== Orbit Controls =====================
 const controls = new OrbitControls(camera, canvas);
@@ -187,7 +191,7 @@ window.addEventListener('resize', () => {
 //==================== Animate ==========================
 const tick = () => {
   donuts.forEach((donut, index) => {
-    const speed = rotationSpeeds[index];
+    const speed = rotationSpeeds[index]; // speed of each donut
 
     donut.rotation.x += speed.x;
     donut.rotation.y += speed.y;
