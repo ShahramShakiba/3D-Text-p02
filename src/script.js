@@ -15,7 +15,7 @@ const textureLoader = new THREE.TextureLoader();
 const textTexture = textureLoader.load('/textures/matcaps/4.png');
 textTexture.colorSpace = THREE.SRGBColorSpace;
 const donutTexture = textureLoader.load('/textures/matcaps/8.png');
-// donutTexture.colorSpace = THREE.SRGBColorSpace;
+donutTexture.colorSpace = THREE.SRGBColorSpace;
 
 // Arrays to hold the donuts and their rotation speeds
 const donuts = [];
@@ -62,7 +62,7 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
   });
   const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45);
 
-  for (let i = 0; i < 2500; i++) {
+  for (let i = 0; i < 1000; i++) {
     const donut = new THREE.Mesh(donutGeometry, donutMaterial);
 
     // position from both side - left & right
