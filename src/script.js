@@ -12,8 +12,10 @@ const axesHelper = new THREE.AxesHelper(); // Axes Helper
 
 //======================= Textures ========================
 const textureLoader = new THREE.TextureLoader();
-const textTexture = textureLoader.load('/textures/matcaps/4.png');
+const textTexture = textureLoader.load('/textures/matcaps/6.png');
 textTexture.colorSpace = THREE.SRGBColorSpace;
+const nameTexture = textureLoader.load('/textures/matcaps/4.png');
+nameTexture.colorSpace = THREE.SRGBColorSpace;
 const donutTexture = textureLoader.load('/textures/matcaps/8.png');
 donutTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -30,9 +32,30 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
   const textMaterial = new THREE.MeshMatcapMaterial({
     matcap: textTexture,
   });
+  const nameMaterial = new THREE.MeshMatcapMaterial({
+    matcap: nameTexture,
+  });
+
+  // Add your name at the top
+  const nameGeometry = new TextGeometry('Shahram Shakiba', {
+    font,
+    size: 0.4,
+    height: 0.1,
+    curveSegments: 5,
+    bevelEnabled: true,
+    bevelThickness: 0.03,
+    bevelSize: 0.02,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+  nameGeometry.center();
+  const nameMesh = new THREE.Mesh(nameGeometry, nameMaterial);
+  nameMesh.position.y = 1.0; // Position it above the other lines
+  scene.add(nameMesh);
+  texts.push(nameMesh);
 
   const lines = ['Creative Developer', '&', 'Curious Mind'];
-  const lineHeight = 0.5; // Adjust the line height as needed
+  const lineHeight = 0.6; // Adjust the line height as needed
 
   lines.forEach((line, index) => {
     const textGeometry = new TextGeometry(line, {
@@ -91,9 +114,9 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
 
   // Add GSAP animation for the camera
   gsap.from(camera.position, {
-    z: 30, // Start from a distant position on the z-axis
+    z: 40, // Start from a distant position on the z-axis
     y: -1,
-    x: 25,
+    x: -55,
     duration: 7,
     ease: 'back.out', // Smooth bounce effect
   });
@@ -101,15 +124,15 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
   // Add GSAP animation for the texts
   texts.forEach((text, index) => {
     gsap.from(text.position, {
-      z: 10, // Start from a distant position on the z-axis
-      duration: 4,
-      delay: index * 0.1, // Delay each line's animation
+      z: 20, // Start from a distant position on the z-axis
+      duration: 9,
+      delay: index * 0.5, // Delay each line's animation
       ease: 'elastic.out', // Smooth bounce effect
     });
     gsap.from(text.rotation, {
       y: Math.PI * 2, // Rotate 360 degrees
       duration: 4,
-      delay: index * 2, // Delay each line's animation
+      delay: index * 0.5, // Delay each line's animation
       ease: 'power2.out', // Smooth ease effect
     });
     gsap.from(text.scale, {
@@ -117,7 +140,7 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
       y: 0,
       z: 0,
       duration: 4,
-      delay: index * 2, // Delay each line's animation
+      delay: index * 0.5, // Delay each line's animation
       ease: 'elastic.out(2, 0.3)', // Elastic ease effect
     });
   });
@@ -128,9 +151,9 @@ let width = window.innerWidth;
 let height = window.innerHeight;
 
 const camera = new THREE.PerspectiveCamera(85, width / height, 0.1, 100);
-camera.position.x = 1;
-camera.position.y = 1;
-camera.position.z = 4.5; // This will be the final position after the animation
+camera.position.x = -1.7;
+camera.position.y = 1.5;
+camera.position.z = 5.2; // This will be the final position after the animation
 scene.add(camera);
 
 //=================== Orbit Controls =====================
