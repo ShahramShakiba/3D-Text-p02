@@ -1,7 +1,8 @@
 import * as THREE from 'three';
-import { FontLoader } from 'three/examples/jsm/Addons.js';
-import { TextGeometry } from 'three/examples/jsm/Addons.js';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { gsap } from 'gsap';
 
 const canvas = document.querySelector('canvas.webgl'); // Canvas
 const scene = new THREE.Scene(); // Scene
@@ -17,6 +18,9 @@ const donutTexture = textureLoader.load('/textures/matcaps/8.png');
 // Arrays to hold the donuts and their rotation speeds
 const donuts = [];
 const rotationSpeeds = [];
+
+// Array to hold text meshes
+const texts = [];
 
 //======================= Fonts ========================
 const fontLoader = new FontLoader();
@@ -45,6 +49,8 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
     const text = new THREE.Mesh(textGeometry, textMaterial);
     text.position.y = index * -lineHeight;
     scene.add(text);
+
+    texts.push(text); // Add text mesh to the array
   });
 
   console.time('donuts');
@@ -54,13 +60,13 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
   });
   const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45);
 
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 2500; i++) {
     const donut = new THREE.Mesh(donutGeometry, donutMaterial);
 
     // position from both side - left & right
-    donut.position.x = (Math.random() - 0.5) * 25;
-    donut.position.y = (Math.random() - 0.5) * 25;
-    donut.position.z = (Math.random() - 0.5) * 25;
+    donut.position.x = (Math.random() - 0.5) * 33;
+    donut.position.y = (Math.random() - 0.5) * 33;
+    donut.position.z = (Math.random() - 0.5) * 33;
 
     donut.rotation.x = Math.random() * Math.PI;
     donut.rotation.y = Math.random() * Math.PI;
@@ -80,6 +86,39 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
   }
 
   console.timeEnd('donuts');
+
+  // Add GSAP animation for the camera
+  gsap.from(camera.position, {
+    z: 30, // Start from a distant position on the z-axis
+    y: -1,
+    x: 25,
+    duration: 7,
+    ease: 'back.out', // Smooth bounce effect
+  });
+
+  // Add GSAP animation for the texts
+  texts.forEach((text, index) => {
+    gsap.from(text.position, {
+      z: 10, // Start from a distant position on the z-axis
+      duration: 4,
+      delay: index * 0.1, // Delay each line's animation
+      ease: 'elastic.out', // Smooth bounce effect
+    });
+    gsap.from(text.rotation, {
+      y: Math.PI * 2, // Rotate 360 degrees
+      duration: 4,
+      delay: index * 2, // Delay each line's animation
+      ease: 'power2.out', // Smooth ease effect
+    });
+    gsap.from(text.scale, {
+      x: 0,
+      y: 0,
+      z: 0,
+      duration: 4,
+      delay: index * 2, // Delay each line's animation
+      ease: 'elastic.out(2, 0.3)', // Elastic ease effect
+    });
+  });
 });
 
 //====================== Camera ==========================
@@ -89,7 +128,7 @@ let height = window.innerHeight;
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
 camera.position.x = 1;
 camera.position.y = 1;
-camera.position.z = 2;
+camera.position.z = 3.5; // This will be the final position after the animation
 scene.add(camera);
 
 //=================== Orbit Controls =====================
