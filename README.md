@@ -29,7 +29,7 @@
 01. _<h4>Three.js supports 3D text geometries using the TextGeometry class, but I need a font in a specific json format known as `  typeface  `.</h4>_
 02. _<h4>Add Helvetiker_regular.typeface Font & Attach the Text to the Scene.</h4>_
 03. _<h4>Utilizing the "Center Method" to centralize the text.</h4>_
-04. _<h4>Include 2500 Donuts in the Scene.</h4>_
+04. _<h4>Include 1000 Donuts in the Scene.</h4>_
 05. _<h4>Randomize the placement of the Donuts to cover the entire screen evenly.</h4>_
 06. _<h4>"Rotate" the donuts randomly in all directions.</h4>_
 07. _<h4>Include "GSAP" Animation in both the Camera View and the Text.</h4>_
@@ -38,25 +38,14 @@
 <br/><br/>
 
 <!-------- try it live -------->
-#### _Give it a go in real-time and give me a Star_ &nbsp; <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25"  /> <a href="" target="_blank"> &nbsp; _3D Text_ </a> 
+#### _Give it a go in real-time and give me a Star_ &nbsp; <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="Glowing Star" width="25"  /> <a href="https://webgl-3d-text-1gail42gq-shahramshakibas-projects.vercel.app/" target="_blank"> &nbsp; _3D Text_ </a> 
 
 <br/>
 
-<!--------- Video 
-Creative Developer & Avid Learner
-Innovative Developer & Knowledge Seeker
-Dynamic Developer & Challenge Enthusiast
-Creative Coder & Lifelong Learner
-Forward-Thinking Developer & Continuous Learner
-Inventive Developer & Intellectual Explorer
-Versatile Developer & Curious Mind
-Creative Technologist & Passionate Learner
-Imaginative Developer & Challenge Conqueror
-Adaptive Developer & Knowledge Addict
---------->
+<!--------- Video --------->
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Clapper%20Board.webp" alt="Clapper Board" width="35" />
 
-
+https://github.com/ShahramShakiba/Threejs-Journey-Part02/assets/110089830/a8201be7-16b4-4eae-b90f-c74469207906
 
   <br/> 
 
