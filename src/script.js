@@ -3,6 +3,7 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { gsap } from 'gsap';
+import { Wireframe } from 'three/examples/jsm/Addons.js';
 
 const canvas = document.querySelector('canvas.webgl'); // Canvas
 const scene = new THREE.Scene(); // Scene
@@ -82,32 +83,32 @@ fontLoader.load('/fonts/optimer_bold.typeface.json', (font) => {
   // Add GSAP animation for the texts
   texts.forEach((text, index) => {
     gsap.from(text.position, {
-      z: 20, // Start from 
+      z: 20, // Start from
       duration: 8,
       delay: index * 0.5, // Delay each line's animation
-      ease: 'elastic.out', 
+      ease: 'elastic.out',
     });
     gsap.from(text.rotation, {
       y: Math.PI * 2, // Rotate 360 degrees
       duration: 4,
-      delay: index * 0.5, 
-      ease: 'power2.out', 
+      delay: index * 0.5,
+      ease: 'power2.out',
     });
     gsap.from(text.scale, {
       x: 0,
       y: 0,
       z: 0,
       duration: 12,
-      delay: index * 0.3, 
-      ease: 'elastic.out(5, 1.5)', 
+      delay: index * 0.3,
+      ease: 'elastic.out(5, 1.5)',
     });
   });
 
   console.time('donuts');
 
   //============ Donuts
-  const donutMaterial = new THREE.MeshMatcapMaterial({
-    matcap: donutTexture,
+  const donutMaterial = new THREE.MeshNormalMaterial({
+    map: donutTexture,
   });
   const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45);
 
@@ -129,9 +130,9 @@ fontLoader.load('/fonts/optimer_bold.typeface.json', (font) => {
 
     // add rotation
     const rotationSpeed = {
-      x: (Math.random() - 0.5) * 0.02,
-      y: (Math.random() - 0.5) * 0.02,
-      z: (Math.random() - 0.5) * 0.01,
+      x: (Math.random() - 0.5) * 0.05,
+      y: (Math.random() - 0.5) * 0.05,
+      z: (Math.random() - 0.5) * 0.02,
     };
 
     rotationSpeeds.push(rotationSpeed);
